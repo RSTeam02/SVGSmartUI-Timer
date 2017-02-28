@@ -9,7 +9,7 @@ class Controller {
         this.view = new View();
         this.view.svgTitle(new TitleDisplay().titleText("SmartUI-Countdown Timer"));
         this.model.setDefault();
-        this.evalInput();
+        this.ledListener();
         this.buttonListener();
         this.res = 0;
     }
@@ -65,7 +65,7 @@ class Controller {
             delayed = 0;
             this.res = 0;
             this.model.setDefault();
-            this.evalInput();
+            this.ledListener();
 
             if (resetPush === 2) {
                 this.setTimer(0);
@@ -99,17 +99,13 @@ class Controller {
         return this.timer;
     }
 
-    evalInput() {
-        this.ledListener();
-    }
-
     //mxn listener
     ledListener() {
         let x = 0;
         let leds = [];
 
         this.ledArr = new LedMatrix();
-        this.view.svgShapeMat(this.ledArr.createLedMat());
+        this.view.svgControl(this.ledArr.createLedMat());
 
         //init each led
         for (let i = 0; i < 24; i++) {
@@ -138,7 +134,6 @@ class Controller {
 
     unitConverter(led) {
         var unit = 0;
-
         if (led.id <= 5) {
             unit += Math.pow(2, 5 - led.id) * 3600000;
         } else if (led.id <= 11) {

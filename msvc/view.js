@@ -11,44 +11,26 @@ class View {
     }
 
 
-    svgControl(led, binArr) {
+    svgControl(led, binArr = new Array(6)) {
         let x = 0;
         let ledArr = [];
         let bin = [];
+        let ledNo = 0;
 
         for (let k = 0; k < binArr.length; k++) {
-            bin[k] = binArr[k].split("");
+            (binArr[k] !== undefined)
+                ? bin[k] = binArr[k].split("")
+                : bin[k] = "000000".split("");
         }
-   
+
         for (let i = 0; i < led.length; i++) {
             ledArr[i] = led[i];
             let y = 0;
             for (let j = 0; j < led[i].length; j++) {
                 (bin[i][j] === "1")
-                    ? this.svgCircle(ledArr[i][j].ledActivity.on, y, x)
-                    : this.svgCircle(ledArr[i][j].ledActivity.off, y, x);
-                //next row
-                y += 50;
-            }
-            //next column
-            x += 50
-        }
-
-    }
-
-
-    //mat output as svg
-    svgShapeMat(led) {
-        let x = 0;
-        let ledArr = [];
-        let bin = [];
-
-        this.i = 0;
-        for (let i = 0; i < led.length; i++) {
-            ledArr[i] = led[i];
-            let y = 0;
-            for (let j = 0; j < led[i].length; j++) {
-                this.svgCircle(ledArr[i][j].ledActivity.off, y, x);
+                    ? this.svgCircle(ledArr[i][j].ledActivity.on, y, x, ledNo)
+                    : this.svgCircle(ledArr[i][j].ledActivity.off, y, x, ledNo);
+                ledNo++;
                 //next row
                 y += 50;
             }
@@ -69,9 +51,9 @@ class View {
     }
 
 
-    svgCircle(ledActivity, relDistX, relDistY) {
+    svgCircle(ledActivity, relDistX, relDistY, ledNo) {
         let led = document.createElementNS(this.svgNS, "circle");
-        led.setAttribute("id", this.i++);
+        led.setAttribute("id", ledNo);
         led.setAttribute("cx", 20);
         led.setAttribute("transform", `translate(${relDistX} ${relDistY})`);
         led.setAttribute("cy", 20);
@@ -81,8 +63,8 @@ class View {
         document.getElementById("ledDisplay").appendChild(led);
 
     }
-    
-    
+
+
     svgTitle(text) {
 
         let txt = document.createElementNS(this.svgNS, "text");
@@ -93,7 +75,7 @@ class View {
         txt.textContent = text;
         document.getElementById("svgTitle").appendChild(txt);
     }
-    
+
     svgText(text) {
 
         let txt = document.createElementNS(this.svgNS, "text");

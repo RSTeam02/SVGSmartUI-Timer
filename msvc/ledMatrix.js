@@ -12,7 +12,6 @@ class LedMatrix {
 
     //init matrix of led instances
     createLedMat() {
-
         var leds = [];
         for (var i = 0; i < 4; i++) {
             leds[i] = [];

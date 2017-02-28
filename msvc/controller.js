@@ -65,9 +65,9 @@ class Controller {
             delayed = 0;
             this.res = 0;
             this.model.setDefault();
-            this.ledListener();
-
+            
             if (resetPush === 2) {
+                this.ledListener();
                 this.setTimer(0);
                 resetPush = 1;
             } else {
@@ -88,7 +88,6 @@ class Controller {
             this.view.svgControl(new LedMatrix().createLedMat(), new BinaryConverter().convert(cb));
             this.view.svgText(new NativeDisplay().controlText(cb));
         });
-
     }
 
     setTimer(timer) {
@@ -102,32 +101,21 @@ class Controller {
     //mxn listener
     ledListener() {
         let x = 0;
-        let leds = [];
 
-        this.ledArr = new LedMatrix();
-        this.view.svgControl(this.ledArr.createLedMat());
-
-        //init each led
-        for (let i = 0; i < 24; i++) {
-            leds[i] = document.getElementById(i);
-        }
-
+        this.view.svgControl(new LedMatrix().createLedMat());
         //handler/listener for each led
-        for (let j = 0; j < leds.length; j++) {
+        for (let j = 0; j < 24; j++) {
             (() => {
                 let x = j;
                 let enabled = true;
                 //access Matrix through handler
                 let handler = () => {
-                    if (enabled) {
-                        this.inputMatrix(leds[x], true);
-                        enabled = false;
-                    } else {
-                        this.inputMatrix(leds[x], false);
-                        enabled = true;
-                    }
+                    (enabled)
+                        ? enabled = false
+                        : enabled = true;
+                    this.inputMatrix(document.getElementById(x), !enabled);
                 };
-                leds[x].addEventListener("click", handler, false);
+                document.getElementById(x).addEventListener("click", handler, false);
             })();
         }
     }
@@ -146,15 +134,11 @@ class Controller {
         return unit;
     }
 
-    inputMatrix(led, on) {
-        if (on) {
-            this.view.ledActivity(led, true);
-            this.res += this.unitConverter(led);
-        } else {
-            this.view.ledActivity(led, false);
-            this.res -= this.unitConverter(led);
-        }
-
+    inputMatrix(led, active) {
+        (active)
+            ? this.res += this.unitConverter(led)
+            : this.res -= this.unitConverter(led);
+        this.view.ledActivity(led, active);
         this.setTimer(this.res);
         this.view.svgText(new NativeDisplay().controlText(this.model.convertHms(this.res)));
     }

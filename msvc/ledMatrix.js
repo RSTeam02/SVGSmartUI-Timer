@@ -5,8 +5,7 @@
  */
 class LedMatrix {
 
-    constructor(view) {
-        this.view = view;
+    constructor() {
         this.clearDisp();
     }
 
@@ -15,7 +14,7 @@ class LedMatrix {
         var leds = [];
         for (var i = 0; i < 4; i++) {
             leds[i] = [];
-            
+
             for (var j = 0; j < 6; j++) {
                 leds[i][j] = new Led();
             }

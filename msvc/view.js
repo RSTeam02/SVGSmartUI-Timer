@@ -40,7 +40,6 @@ class View {
     }
 
     ledActivity(led, enabled) {
-
         if (enabled) {
             led.setAttribute("fill", `url(#RadialGradient1)`);
             led.setAttribute("fill-opacity", 1);
@@ -49,7 +48,6 @@ class View {
             led.setAttribute("fill-opacity", .2);
         }
     }
-
 
     svgCircle(ledActivity, relDistX, relDistY, ledNo) {
         let led = document.createElementNS(this.svgNS, "circle");
@@ -61,12 +59,9 @@ class View {
         led.setAttribute("fill-opacity", ledActivity.opacity);
         led.setAttribute("fill", `url(${ledActivity.color})`);
         document.getElementById("ledDisplay").appendChild(led);
-
     }
 
-
     svgTitle(text) {
-
         let txt = document.createElementNS(this.svgNS, "text");
         txt.setAttribute("fill-opacity", .7);
         txt.setAttribute("fill", "white");
@@ -77,7 +72,6 @@ class View {
     }
 
     svgText(text) {
-
         let txt = document.createElementNS(this.svgNS, "text");
         txt.setAttribute("fill-opacity", .7);
         txt.setAttribute("fill", "white");

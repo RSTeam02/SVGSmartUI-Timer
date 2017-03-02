@@ -17,7 +17,10 @@
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
         }
         
-    
+        #modes {
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
+        }
     </style>
 </head>
 
@@ -49,6 +52,10 @@
             <g  id ="nativeDisplay" transform="translate(2, 280)"></g>       
         </svg>
     <form name="selector" class="text">
+        <fieldset id="modes">
+            Int <input class="radioBtn" id="dec" type="radio" value="dec" name="format" checked></input>
+            Dot <input class="radioBtn" id="dot" type="radio" value="dot" name="format"></input>
+        </fieldset>
         <input class="btn" type="button" id="startBtn" value="start">
         <input class="btn" type="button" id="resetBtn" value="reset">
 

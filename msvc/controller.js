@@ -8,9 +8,11 @@ class Controller {
         this.model = new Countdown();
         this.view = new View();
         this.view.svgTitle(new TitleDisplay().titleText("SmartUI-Countdown Timer"));
+        this.classRadio = document.getElementsByClassName("radioBtn");
+        this.mode = document.selector.elements.format;
         this.model.setDefault();
-        this.ledListener();
         this.buttonListener();
+        this.ledListener();
         this.res = 0;
     }
 
@@ -25,6 +27,17 @@ class Controller {
         var classBtn = document.getElementsByClassName("btn");
         var btn = [];
 
+        for (let i = 0; i < this.classRadio.length; i++) {
+            if (this.classRadio[i].checked) {
+                this.view.setMode(this.classRadio[i].value);
+            }
+        }
+
+        for (let i = 0; i < this.classRadio.length; i++) {
+            this.classRadio[i].addEventListener("click", () => {
+                this.view.setMode(this.classRadio[i].value);
+            });
+        }
         //start
         btn[0] = () => {
             resetPush = 1;
@@ -65,7 +78,7 @@ class Controller {
             delayed = 0;
             this.res = 0;
             this.model.setDefault();
-            
+
             if (resetPush === 2) {
                 this.ledListener();
                 this.setTimer(0);

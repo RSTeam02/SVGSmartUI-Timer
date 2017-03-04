@@ -14,7 +14,6 @@ class Countdown {
         callback(this.convertHms(-this.elapsedLap));
     }
 
-
     convertHms(input) {
         var millis = input / 100;
         var tenth = Math.round(millis);

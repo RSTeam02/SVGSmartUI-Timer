@@ -7,7 +7,8 @@ class Controller {
     constructor() {
         this.model = new Countdown();
         this.view = new View();
-        this.view.svgTitle(new TitleDisplay().titleText("SmartUI-Countdown Timer"));
+        this.numSwitcher = new NumSwitcher();
+        new SVGStaticObj().svgTitle(new TitleDisplay().titleText("SmartUI-Countdown Timer"));
         this.classRadio = document.getElementsByClassName("radioBtn");
         this.mode = document.selector.elements.format;
         this.model.setDefault();
@@ -29,13 +30,13 @@ class Controller {
 
         for (let i = 0; i < this.classRadio.length; i++) {
             if (this.classRadio[i].checked) {
-                this.view.setMode(this.classRadio[i].value);
+                this.numSwitcher.setMode(this.classRadio[i].value);
             }
         }
 
         for (let i = 0; i < this.classRadio.length; i++) {
             this.classRadio[i].addEventListener("click", () => {
-                this.view.setMode(this.classRadio[i].value);
+                this.numSwitcher.setMode(this.classRadio[i].value);
             });
         }
         //start
@@ -84,7 +85,7 @@ class Controller {
                 this.setTimer(0);
                 resetPush = 1;
             } else {
-                this.view.svgControl(new LedMatrix().createLedMat(), new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
+                this.view.svgRaster(this.numSwitcher, new LedMatrix().createLedMat(), new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
             }
             this.view.svgText(new NativeDisplay().controlText(this.model.convertHms(this.getTimer())));
             clearInterval(this.interval);
@@ -98,7 +99,7 @@ class Controller {
 
     updateView(start, delayed = 0) {
         this.model.startCountdown(start, delayed, (cb) => {
-            this.view.svgControl(new LedMatrix().createLedMat(), new BinaryConverter().convert(cb));
+            this.view.svgRaster(this.numSwitcher, new LedMatrix().createLedMat(), new BinaryConverter().convert(cb));
             this.view.svgText(new NativeDisplay().controlText(cb));
         });
     }
@@ -115,7 +116,7 @@ class Controller {
     ledListener() {
         let x = 0;
 
-        this.view.svgControl(new LedMatrix().createLedMat());
+        this.view.svgRaster(this.numSwitcher, new LedMatrix().createLedMat());
         //handler/listener for each led
         for (let j = 0; j < 24; j++) {
             (() => {
@@ -133,6 +134,7 @@ class Controller {
         }
     }
 
+    //assign h:m:s from raster input and convert to ms
     unitConverter(led) {
         var unit = 0;
         if (led.id <= 5) {
@@ -147,6 +149,7 @@ class Controller {
         return unit;
     }
 
+    //click on raster element(s) => convert to ms
     inputMatrix(led, active) {
         (active)
             ? this.res += this.unitConverter(led)

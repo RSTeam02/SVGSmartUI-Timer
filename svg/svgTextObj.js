@@ -1,4 +1,5 @@
 class SVGTextObj {
+    
     svgText(text) {
         let txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
         txt.setAttribute("fill-opacity", .7);

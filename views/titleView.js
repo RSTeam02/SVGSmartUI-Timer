@@ -1,4 +1,4 @@
-class TitleDisplay {
+class TitleView {
 
     constructor() {
         this.clearDisp();

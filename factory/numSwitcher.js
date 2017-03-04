@@ -17,9 +17,7 @@ class NumSwitcher {
             default:
                 return null;
         }
-        
+
     }
-    
-    
 
 }

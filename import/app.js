@@ -1,3 +1,3 @@
-define(["../factory/numSwitcher", "../svg/svgStaticObj", "../svg/svgTextObj", "../svg/svgMatObj", "../msvc/title", "../msvc/binaryConverter", "../msvc/view", "../msvc/countdown", "../msvc/led", "../msvc/controller"], function () {
+define(["../factory/numSwitcher", "../svg/svgStaticObj", "../svg/svgTextObj", "../svg/svgMatObj", "../views/titleView", "../msvc/binaryConverter", "../views/textView", "../views/matView", "../msvc/countdown", "../msvc/led", "../msvc/controller"], function () {
     new Controller();    
 });

@@ -6,9 +6,10 @@ class Controller {
 
     constructor() {
         this.model = new Countdown();
-        this.view = new View();
+        this.matView = new MatView();
+        this.textView = new TextView();
         this.numSwitcher = new NumSwitcher();
-        new SVGStaticObj().svgTitle(new TitleDisplay().titleText("SmartUI-Countdown Timer"));
+        new SVGStaticObj().svgTitle(new TitleView().titleText("SmartUI-Countdown Timer"));
         this.classRadio = document.getElementsByClassName("radioBtn");
         this.mode = document.selector.elements.format;
         this.model.setDefault();
@@ -84,9 +85,9 @@ class Controller {
                 this.setTimer(0);
                 resetPush = 1;
             } else {
-                this.view.svgRaster(this.numSwitcher, new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
+                this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
             }
-            this.view.svgText(this.model.convertHms(this.getTimer()));
+            this.textView.svgText(this.model.convertHms(this.getTimer()));
             clearInterval(this.interval);
             classBtn[0].value = "start";
             resetPush++;
@@ -98,8 +99,8 @@ class Controller {
 
     updateView(start, delayed = 0) {
         this.model.startCountdown(start, delayed, (cb) => {
-            this.view.svgRaster(this.numSwitcher, new BinaryConverter().convert(cb));
-            this.view.svgText(cb);
+            this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(cb));
+            this.textView.svgText(cb);
         });
     }
 
@@ -115,7 +116,7 @@ class Controller {
     ledListener() {
         let x = 0;
 
-        this.view.svgRaster(this.numSwitcher);
+        this.matView.svgRaster(this.numSwitcher);
         //handler/listener for each led
         for (let j = 0; j < 24; j++) {
             (() => {
@@ -153,8 +154,8 @@ class Controller {
         (active)
             ? this.res += this.unitConverter(led)
             : this.res -= this.unitConverter(led);
-        this.view.ledActivity(led, active);
+        this.matView.ledActivity(led, active);
         this.setTimer(this.res);
-        this.view.svgText(this.model.convertHms(this.res));
+        this.textView.svgText(this.model.convertHms(this.res));
     }
 }

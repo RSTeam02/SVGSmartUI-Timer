@@ -3,7 +3,7 @@
  * View as SVG => dom
  */
 
-class View {
+class MatView {
 
     //raster display decimal or circle dots
     svgRaster(numSwitcher, binArr = new Array(6)) {
@@ -13,7 +13,6 @@ class View {
         let ledNo = 0;
 
         this.clearSVGMat();
-        this.clearSVGTxt();
 
         for (let k = 0; k < binArr.length; k++) {
             (binArr[k] !== undefined)
@@ -36,29 +35,16 @@ class View {
             x += 50
         }
 
-    }    
-   
+    }
+
     clearSVGMat() {
         while (ledDisplay.firstChild) {
             ledDisplay.removeChild(ledDisplay.firstChild);
         }
-       
-    }
-    
-    clearSVGTxt(){
-         while (nativeDisplay.firstChild) {
-            nativeDisplay.removeChild(nativeDisplay.firstChild);
-        }
-    }
-
-    //numerical time display
-    svgText(text) {
-        new SVGTextObj().svgText(text.join(":"));
     }
 
     //invoked when event occurs 
-    ledActivity(led, enabled) {   
-        this.clearSVGTxt();   
+    ledActivity(led, enabled) {
         if (enabled) {
             led.setAttribute("fill", `url(#RadialGradient1)`);
             led.setAttribute("fill-opacity", 1);

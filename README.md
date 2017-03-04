@@ -6,7 +6,7 @@ Every unit has a sum from 1 to 63, for example:<br />
 0+16+8+4+2+0 = 30 min<br />
 32+0+8+4+0+1 = 45 sec<br />
 
-+ 04.03: obsolete files removed, various small fixes
++ 04.03: obsolete files removed, various small fixes (ledMatrix caused additionally O(n2))
 + 02.03: integer visualization mode added
 + UI controls with circle dots (on is 1, off is 0)
 + increment or decrement when push or repush again

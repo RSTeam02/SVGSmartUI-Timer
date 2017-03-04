@@ -5,8 +5,9 @@
 
 class Led {
 
+
     constructor() {
-        //init led with certain opacity, color
+        //init led with certain opacity, color   
         this.ledActivity = {
             on: {
                 opacity: 1,
@@ -18,7 +19,8 @@ class Led {
                 color: "#RadialGradient2"
             }
         };
-    }
+        
+    }   
 }
 
 

@@ -78,16 +78,15 @@ class Controller {
             stopped = running = false;
             delayed = 0;
             this.res = 0;
-            this.model.setDefault();
-
+            this.model.setDefault();           
             if (resetPush === 2) {
                 this.ledListener();
                 this.setTimer(0);
                 resetPush = 1;
             } else {
-                this.view.svgRaster(this.numSwitcher, new LedMatrix().createLedMat(), new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
+                this.view.svgRaster(this.numSwitcher, new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
             }
-            this.view.svgText(new NativeDisplay().controlText(this.model.convertHms(this.getTimer())));
+            this.view.svgText(this.model.convertHms(this.getTimer()));
             clearInterval(this.interval);
             classBtn[0].value = "start";
             resetPush++;
@@ -99,8 +98,8 @@ class Controller {
 
     updateView(start, delayed = 0) {
         this.model.startCountdown(start, delayed, (cb) => {
-            this.view.svgRaster(this.numSwitcher, new LedMatrix().createLedMat(), new BinaryConverter().convert(cb));
-            this.view.svgText(new NativeDisplay().controlText(cb));
+            this.view.svgRaster(this.numSwitcher, new BinaryConverter().convert(cb));
+            this.view.svgText(cb);
         });
     }
 
@@ -116,7 +115,7 @@ class Controller {
     ledListener() {
         let x = 0;
 
-        this.view.svgRaster(this.numSwitcher, new LedMatrix().createLedMat());
+        this.view.svgRaster(this.numSwitcher);
         //handler/listener for each led
         for (let j = 0; j < 24; j++) {
             (() => {
@@ -156,6 +155,6 @@ class Controller {
             : this.res -= this.unitConverter(led);
         this.view.ledActivity(led, active);
         this.setTimer(this.res);
-        this.view.svgText(new NativeDisplay().controlText(this.model.convertHms(this.res)));
+        this.view.svgText(this.model.convertHms(this.res));
     }
 }

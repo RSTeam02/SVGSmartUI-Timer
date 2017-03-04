@@ -6,11 +6,14 @@
 class View {
 
     //raster display decimal or circle dots
-    svgRaster(numSwitcher, led, binArr = new Array(6)) {
+    svgRaster(numSwitcher, binArr = new Array(6)) {
         let x = 0;
         let ledArr = [];
         let bin = [];
         let ledNo = 0;
+
+        this.clearSVGMat();
+        this.clearSVGTxt();
 
         for (let k = 0; k < binArr.length; k++) {
             (binArr[k] !== undefined)
@@ -18,13 +21,13 @@ class View {
                 : bin[k] = [..."000000"];
         }
 
-        for (let i = 0; i < led.length; i++) {
-            ledArr[i] = led[i];
+        for (let i = 0; i < 4; i++) {
+            ledArr[i] = [];
             let y = 0;
-            for (let j = 0; j < led[i].length; j++) {
+            for (let j = 0; j < 6; j++) {
                 (bin[i][j] === "1")
-                    ? numSwitcher.numSwitch(ledArr[i][j].ledActivity.on, y, x, ledNo)
-                    : numSwitcher.numSwitch(ledArr[i][j].ledActivity.off, y, x, ledNo);
+                    ? numSwitcher.numSwitch(new Led().ledActivity.on, y, x, ledNo)
+                    : numSwitcher.numSwitch(new Led().ledActivity.off, y, x, ledNo);
                 ledNo++;
                 //next row
                 y += 50;
@@ -32,15 +35,30 @@ class View {
             //next column
             x += 50
         }
+
+    }    
+   
+    clearSVGMat() {
+        while (ledDisplay.firstChild) {
+            ledDisplay.removeChild(ledDisplay.firstChild);
+        }
+       
+    }
+    
+    clearSVGTxt(){
+         while (nativeDisplay.firstChild) {
+            nativeDisplay.removeChild(nativeDisplay.firstChild);
+        }
     }
 
     //numerical time display
     svgText(text) {
-        new SVGTextObj().svgText(text);
+        new SVGTextObj().svgText(text.join(":"));
     }
 
     //invoked when event occurs 
-    ledActivity(led, enabled) {
+    ledActivity(led, enabled) {   
+        this.clearSVGTxt();   
         if (enabled) {
             led.setAttribute("fill", `url(#RadialGradient1)`);
             led.setAttribute("fill-opacity", 1);

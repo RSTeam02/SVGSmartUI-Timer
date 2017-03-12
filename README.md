@@ -7,8 +7,7 @@ Every unit has a sum from 1 to 63, for example:<br />
  0--8--8--0<br />
  0--4--4--0<br />
  2--2--0--0<br />
- 0--0--1--0<br />
- ---------------
+ 0--0--1--0<br />=<br /> 
  2--30-45-0
 
 + 12.03: Raster with vertical alignment => every digit assigned to vertical column. 

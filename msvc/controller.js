@@ -79,7 +79,7 @@ class Controller {
             stopped = running = false;
             delayed = 0;
             this.res = 0;
-            this.model.setDefault();           
+            this.model.setDefault();
             if (resetPush === 2) {
                 this.ledListener();
                 this.setTimer(0);
@@ -137,14 +137,15 @@ class Controller {
     //assign h:m:s from raster input and convert to ms
     unitConverter(led) {
         var unit = 0;
+
         if (led.id <= 5) {
-            unit += Math.pow(2, 5 - led.id) * 3600000;
+            unit += Math.pow(2, led.id) * 3600000;
         } else if (led.id <= 11) {
-            unit += Math.pow(2, 5 - led.id % 6) * 60000;
+            unit += Math.pow(2, led.id % 6) * 60000;
         } else if (led.id <= 17) {
-            unit += Math.pow(2, 5 - led.id % 12) * 1000;
+            unit += Math.pow(2, led.id % 12) * 1000;
         } else {
-            unit += Math.pow(2, 5 - led.id % 18) * 100;
+            unit += Math.pow(2, led.id % 18) * 100;
         }
         return unit;
     }

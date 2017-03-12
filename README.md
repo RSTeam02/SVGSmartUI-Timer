@@ -2,10 +2,12 @@
 
 The project is based on the binary countdowntimer project, its UI is the table (matrix) itself and each unit (hour, minute, second) is defined by binary digits. The SVG display allows to scale viewing size, when the browser window is resized.
 Every unit has a sum from 1 to 63, for example:<br />
-0+0+0+0+2+0 = 2 hour<br />
-0+16+8+4+2+0 = 30 min<br />
-32+0+8+4+0+1 = 45 sec<br />
+0<br />+<br />0<br />+<br />0<br />+<br />0<br />+<br />2<br />+<br />0 
+0<br />+<br />16<br />+<br />8<br />+<br />4<br />+<br />2<br />+<br />0 
+32<br />+<br />0<br />+<br />8<br />+<br />4<br />+<br />0<br />+<br />1<br />
+2hours:30min:45sec
 
++ 12.03: Raster with vertical alignment => every digit assigned to vertical column (for each unit). 
 + 04.03: obsolete files removed, various small fixes (ledMatrix caused additionally O(n2))
 + 02.03: integer visualization mode added
 + UI controls with circle dots (on is 1, off is 0)

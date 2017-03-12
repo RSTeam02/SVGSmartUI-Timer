@@ -10,7 +10,7 @@ class MatView {
         let x = 0;
         let ledArr = [];
         let bin = [];
-        let ledNo = 0;
+        let ledNo = 23;
 
         this.clearSVGMat();
 
@@ -20,19 +20,19 @@ class MatView {
                 : bin[k] = [..."000000"];
         }
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 3; i >= 0; i--) {
             ledArr[i] = [];
             let y = 0;
             for (let j = 0; j < 6; j++) {
                 (bin[i][j] === "1")
                     ? numSwitcher.numSwitch(new Led().ledActivity.on, y, x, ledNo)
                     : numSwitcher.numSwitch(new Led().ledActivity.off, y, x, ledNo);
-                ledNo++;
+                ledNo--;
                 //next row
-                y += 50;
+                y += 35;
             }
             //next column
-            x += 50
+            x += 85
         }
 
     }
@@ -48,7 +48,7 @@ class MatView {
         if (enabled) {
             led.setAttribute("fill", `url(#RadialGradient1)`);
             led.setAttribute("fill-opacity", 1);
-            led.textContent = Math.pow(2, (5 - led.id % 6));
+            led.textContent = Math.pow(2, led.id % 6);
         } else {
             led.setAttribute("fill", `url(#RadialGradient2)`);
             led.setAttribute("fill-opacity", .2);

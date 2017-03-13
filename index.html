@@ -6,6 +6,9 @@
     <style>
         body {
             background-color: black;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
         }
         
         fieldset {
@@ -48,13 +51,14 @@
                                 
             </defs>
             <g  id ="svgTitle" transform="translate(2, 20)"></g>  
-            <g  id ="ledDisplay" transform="translate(315, 30) rotate(90)"" ></g>           
+            <g  id ="ledDisplay" transform="translate(315, 30) rotate(90)"></g>           
             <g  id ="nativeDisplay" transform="translate(2, 280)"></g>       
         </svg>
     <form name="selector" class="text">
         <fieldset id="modes">
             dec <input class="radioBtn" id="dec" type="radio" value="dec" name="format" checked></input>
             dot <input class="radioBtn" id="dot" type="radio" value="dot" name="format"></input>
+            rect <input class="radioBtn" id="rect" type="radio" value="rect" name="format"></input>
         </fieldset>
         <input class="btn" type="button" id="startBtn" value="start">
         <input class="btn" type="button" id="resetBtn" value="reset">

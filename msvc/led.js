@@ -15,7 +15,7 @@ class Led {
             },
 
             off: {
-                opacity: .2,
+                opacity: .3,
                 color: "#RadialGradient2"
             }
         };

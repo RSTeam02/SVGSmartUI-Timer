@@ -14,6 +14,8 @@ class NumSwitcher {
                 return new SVGMatObject().svgCircle(...property);
             case "dec":
                 return new SVGMatObject().svgNum(...property);
+            case "rect":
+                return new SVGMatObject().svgRect(...property);
             default:
                 return null;
         }

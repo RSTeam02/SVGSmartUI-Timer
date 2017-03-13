@@ -2,11 +2,24 @@ class SVGMatObject {
 
     svgCircle(...property) {
         let led = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        led.setAttribute("cursor", "pointer");
         led.setAttribute("id", property[3]);
         led.setAttribute("cx", 10);
         led.setAttribute("transform", `translate(${property[1]} ${property[2]})`);
         led.setAttribute("cy", 40);
         led.setAttribute("r", 12);
+        led.setAttribute("fill-opacity", property[0].opacity);
+        led.setAttribute("fill", `url(${property[0].color})`);
+        document.getElementById("ledDisplay").appendChild(led);
+    }
+
+    svgRect(...property) {
+        let led = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        led.setAttribute("cursor", "pointer");
+        led.setAttribute("id", property[3]);
+        led.setAttribute("transform", `translate(${property[1]} ${property[2] + 25})`);
+        led.setAttribute("width", 20);
+        led.setAttribute("height", 30);
         led.setAttribute("fill-opacity", property[0].opacity);
         led.setAttribute("fill", `url(${property[0].color})`);
         document.getElementById("ledDisplay").appendChild(led);

@@ -10,8 +10,9 @@ class Controller {
         this.textView = new TextView();
         this.numSwitcher = new NumSwitcher();
         new SVGStaticObj().svgTitle(new TitleView().titleText("SmartUI-Countdown Timer"));
-        this.classRadio = document.getElementsByClassName("radioBtn");
-        this.mode = document.selector.elements.format;
+        this.classRadioShape = document.getElementsByClassName("radioBtnShape");
+        this.classRadioCol = document.getElementsByClassName("radioBtnCol");
+
         this.model.setDefault();
         this.buttonListener();
         this.ledListener();
@@ -29,15 +30,24 @@ class Controller {
         var classBtn = document.getElementsByClassName("btn");
         var btn = [];
 
-        for (let i = 0; i < this.classRadio.length; i++) {
-            if (this.classRadio[i].checked) {
-                this.numSwitcher.setMode(this.classRadio[i].value);
+
+
+        for (let i = 0; i < this.classRadioShape.length; i++) {
+            if (this.classRadioShape[i].checked) {
+                this.numSwitcher.setMode(this.classRadioShape[i].value);
             }
+            this.classRadioShape[i].addEventListener("click", () => {
+                this.numSwitcher.setMode(this.classRadioShape[i].value);
+            });
         }
 
-        for (let i = 0; i < this.classRadio.length; i++) {
-            this.classRadio[i].addEventListener("click", () => {
-                this.numSwitcher.setMode(this.classRadio[i].value);
+        for (let i = 0; i < this.classRadioCol.length; i++) {
+            if (this.classRadioCol[i].checked) {
+                this.setColor(this.classRadioCol[i].value);
+            }
+            this.classRadioCol[i].addEventListener("click", () => {
+                this.setColor(this.classRadioCol[i].value);
+
             });
         }
         //start
@@ -85,7 +95,7 @@ class Controller {
                 this.setTimer(0);
                 resetPush = 1;
             } else {
-                this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
+                this.matView.svgRaster(this.numSwitcher, this.getColor(), new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
             }
             this.textView.svgText(this.model.convertHms(this.getTimer()));
             clearInterval(this.interval);
@@ -99,11 +109,19 @@ class Controller {
 
     updateView(start, delayed = 0) {
         this.model.startCountdown(start, delayed, (cb) => {
-            this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(cb));
+            this.matView.svgRaster(this.numSwitcher, this.getColor(), new BinaryConverter().convert(cb));
             this.textView.svgText(cb);
         });
     }
 
+    setColor(color) {
+        this.color = color;
+    }
+
+    getColor() {
+        console.log(this.color)
+        return this.color;
+    }
     setTimer(timer) {
         this.timer = timer;
     }
@@ -116,7 +134,7 @@ class Controller {
     ledListener() {
         let x = 0;
 
-        this.matView.svgRaster(this.numSwitcher);
+        this.matView.svgRaster(this.numSwitcher, this.getColor());
         //handler/listener for each led
         for (let j = 0; j < 24; j++) {
             (() => {
@@ -155,7 +173,7 @@ class Controller {
         (active)
             ? this.res += this.unitConverter(led)
             : this.res -= this.unitConverter(led);
-        this.matView.ledActivity(led, active);
+        new SVGLed().onOffState(led.id, active, this.getColor());
         this.setTimer(this.res);
         this.textView.svgText(this.model.convertHms(this.res));
     }

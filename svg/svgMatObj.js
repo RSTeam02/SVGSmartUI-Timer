@@ -8,9 +8,8 @@ class SVGMatObject {
         led.setAttribute("transform", `translate(${property[1]} ${property[2]})`);
         led.setAttribute("cy", 40);
         led.setAttribute("r", 12);
-        led.setAttribute("fill-opacity", property[0].opacity);
-        led.setAttribute("fill", `url(${property[0].color})`);
         document.getElementById("ledDisplay").appendChild(led);
+        new SVGLed().onOffState(property[3], property[0], property[4]);
     }
 
     svgRect(...property) {
@@ -20,9 +19,8 @@ class SVGMatObject {
         led.setAttribute("transform", `translate(${property[1]} ${property[2] + 25})`);
         led.setAttribute("width", 20);
         led.setAttribute("height", 30);
-        led.setAttribute("fill-opacity", property[0].opacity);
-        led.setAttribute("fill", `url(${property[0].color})`);
         document.getElementById("ledDisplay").appendChild(led);
+        new SVGLed().onOffState(property[3], property[0], property[4]);
     }
 
     svgNum(...property) {
@@ -33,16 +31,18 @@ class SVGMatObject {
         txt.setAttribute("id", property[3]);
         txt.setAttribute("x", property[1] + 10);
         txt.setAttribute("y", property[2] + 10);
-        txt.setAttribute("fill-opacity", property[0].opacity);
-        txt.setAttribute("fill", `url(${property[0].color})`);
+
         txt.setAttribute("style", "writing-mode: sideways-lr");
         txt.setAttribute("font-family", "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif");
         txt.setAttribute("font-size", "24px");
-        (property[0].opacity === 1)
+        /*(property[0] === true)
             ? numMode = document.createTextNode(Math.pow(2, (5 - (23 - property[3]) % 6)))
             : numMode = document.createTextNode(0);
-        txt.appendChild(numMode);
+        txt.appendChild(numMode);*/
         document.getElementById("ledDisplay").appendChild(txt);
+        new SVGLed().onOffState(property[3], property[0], property[4]);
     }
+
+
 
 }

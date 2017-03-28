@@ -6,7 +6,7 @@
 class MatView {
 
     //raster display decimal or circle dots
-    svgRaster(numSwitcher, binArr = new Array(6)) {
+    svgRaster(numSwitcher, col, binArr = new Array(6)) {
         let x = 0;
         let ledArr = [];
         let bin = [];
@@ -24,9 +24,11 @@ class MatView {
             ledArr[i] = [];
             let y = 0;
             for (let j = 0; j < 6; j++) {
-                (bin[i][j] === "1")
-                    ? numSwitcher.numSwitch(new Led().ledActivity.on, y, x, ledNo)
-                    : numSwitcher.numSwitch(new Led().ledActivity.off, y, x, ledNo);
+                if (bin[i][j] === "1") {
+                    numSwitcher.numSwitch(true, y, x, ledNo, col);
+                } else {
+                    numSwitcher.numSwitch(false, y, x, ledNo, col);
+                }
                 ledNo--;
                 //next row
                 y += 35;
@@ -34,25 +36,11 @@ class MatView {
             //next column
             x += 85
         }
-
     }
 
     clearSVGMat() {
         while (ledDisplay.firstChild) {
             ledDisplay.removeChild(ledDisplay.firstChild);
-        }
-    }
-
-    //invoked when event occurs 
-    ledActivity(led, enabled) {
-        if (enabled) {
-            led.setAttribute("fill", `url(#RadialGradient1)`);
-            led.setAttribute("fill-opacity", 1);
-            led.textContent = Math.pow(2, led.id % 6);
-        } else {
-            led.setAttribute("fill", `url(#RadialGradient2)`);
-            led.setAttribute("fill-opacity", .3);
-            led.textContent = 0;
         }
     }
 

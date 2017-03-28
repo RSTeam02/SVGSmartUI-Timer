@@ -119,9 +119,9 @@ class Controller {
     }
 
     getColor() {
-        console.log(this.color)
         return this.color;
     }
+
     setTimer(timer) {
         this.timer = timer;
     }

@@ -31,14 +31,9 @@ class SVGMatObject {
         txt.setAttribute("id", property[3]);
         txt.setAttribute("x", property[1] + 10);
         txt.setAttribute("y", property[2] + 10);
-
         txt.setAttribute("style", "writing-mode: sideways-lr");
         txt.setAttribute("font-family", "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif");
-        txt.setAttribute("font-size", "24px");
-        /*(property[0] === true)
-            ? numMode = document.createTextNode(Math.pow(2, (5 - (23 - property[3]) % 6)))
-            : numMode = document.createTextNode(0);
-        txt.appendChild(numMode);*/
+        txt.setAttribute("font-size", "24px");      
         document.getElementById("ledDisplay").appendChild(txt);
         new SVGLed().onOffState(property[3], property[0], property[4]);
     }

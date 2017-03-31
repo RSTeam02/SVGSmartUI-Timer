@@ -11,6 +11,7 @@ Every unit has a sum from 1 to 63, for example:<br />
  0---0---1--0<br />=<br /> 
  2--30--45--0
 
++ 31.03: randomize R,G,B
 + 28.03: R,G,B colors added
 + 12.03: Raster with vertical alignment (90° rotation) => every digit is assigned to a vertical column.
 + 04.03: obsolete files removed, various small fixes (ledMatrix caused additionally O(n2))

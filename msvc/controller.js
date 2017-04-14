@@ -5,6 +5,14 @@
 class Controller {
 
     constructor() {
+        this.r = document.getElementById("red");
+        this.g = document.getElementById("green");
+        this.b = document.getElementById("blue");
+        this.rInfo = document.getElementById("redInfo");
+        this.gInfo = document.getElementById("greenInfo");
+        this.bInfo = document.getElementById("blueInfo");
+        this.initGradient();
+        this.RGBSlider();
         this.model = new Countdown();
         this.matView = new MatView();
         this.textView = new TextView();
@@ -50,6 +58,10 @@ class Controller {
 
             });
         }
+        document.getElementById("rnd").addEventListener("click", () => {
+            this.rgbRand();
+            this.setGradient();
+        });
         //start
         btn[0] = () => {
             resetPush = 1;
@@ -60,6 +72,10 @@ class Controller {
                     running = true;
                     finished = false;
                     this.interval = setInterval(() => {
+                        if (document.getElementById("rnd").checked) {
+                            this.rgbRand();
+                            this.setGradient();
+                        }
                         if (-this.model.elapsedLap >= 50) {
                             (stopped)
                                 ? this.updateView(start, delayed)
@@ -95,7 +111,7 @@ class Controller {
                 this.setTimer(0);
                 resetPush = 1;
             } else {
-                this.matView.svgRaster(this.numSwitcher, this.getColor(), new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
+                this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
             }
             this.textView.svgText(this.model.convertHms(this.getTimer()));
             clearInterval(this.interval);
@@ -109,18 +125,12 @@ class Controller {
 
     updateView(start, delayed = 0) {
         this.model.startCountdown(start, delayed, (cb) => {
-            this.matView.svgRaster(this.numSwitcher, this.getColor(), new BinaryConverter().convert(cb));
+            this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(cb));
             this.textView.svgText(cb);
         });
     }
 
-    setColor(color) {
-        this.color = color;
-    }
 
-    getColor() {
-        return this.color;
-    }
 
     setTimer(timer) {
         this.timer = timer;
@@ -134,7 +144,7 @@ class Controller {
     ledListener() {
         let x = 0;
 
-        this.matView.svgRaster(this.numSwitcher, this.getColor());
+        this.matView.svgRaster(this.numSwitcher);
         //handler/listener for each led
         for (let j = 0; j < 24; j++) {
             (() => {
@@ -173,8 +183,56 @@ class Controller {
         (active)
             ? this.res += this.unitConverter(led)
             : this.res -= this.unitConverter(led);
-        new SVGLed().onOffState(led.id, active, this.getColor());
+        new SVGLed().onOffState(led.id, active);
         this.setTimer(this.res);
         this.textView.svgText(this.model.convertHms(this.res));
+    }
+
+    rgbRand() {
+        let rgb = new Array(3);
+        for (var i = 0; i < rgb.length; i++) {
+            rgb[i] = Math.floor(Math.random() * 255);
+        }
+        this.r.value = rgb[0];
+        this.g.value = rgb[1];
+        this.b.value = rgb[2];
+    }
+
+    RGBSlider() {
+        let colClass = document.getElementsByClassName("colClass");
+
+        for (var i = 0; i < colClass.length; i++) {
+            colClass[i].addEventListener("input", () => {
+                this.setGradient();
+            });
+        }
+        this.rgbRand();
+        this.setGradient();
+    }
+
+    initGradient() {
+
+        var radialGradient = document.createElementNS("http://www.w3.org/2000/svg", "radialGradient");
+
+        radialGradient.setAttribute("id", "RadialGradient5");
+        document.getElementById("defCol").appendChild(radialGradient);
+
+        var stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+        stop1.setAttribute("id", "stop1");
+        stop1.setAttribute("offset", "0%");
+        stop1.setAttribute("stop-color", "white");
+        document.getElementById("RadialGradient5").appendChild(stop1);
+
+        this.stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+        this.stop2.setAttribute("id", "stop2");
+        this.stop2.setAttribute("offset", "100%");
+        document.getElementById("RadialGradient5").appendChild(this.stop2);
+    }
+
+    setGradient() {
+        this.rInfo.innerHTML = `Red: ${this.r.value}`;
+        this.gInfo.innerHTML = `Green: ${this.g.value}`;
+        this.bInfo.innerHTML = `Blue: ${this.b.value}`;
+        this.stop2.setAttribute("stop-color", `rgba(${this.r.value},${this.g.value},${this.b.value},1)`);
     }
 }

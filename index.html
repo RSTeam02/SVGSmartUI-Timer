@@ -11,16 +11,14 @@
             -webkit-user-select: none;
         }
         
-        fieldset {
-            border: none;
-        }
+    
         
         .title {
             color: white;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
         }
         
-        #modes {
+        form, fieldset {
             color: white;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
         }
@@ -30,38 +28,34 @@
 
 <body>
     <svg version="1.1" viewBox="0 0 300 300">
-            <defs>
-                <radialGradient id="RadialGradient1">
-                    <stop offset="0%" stop-color="orange"/>
-                    <stop offset="100%" stop-color="rgba(255,0,0,1)"/>
-                </radialGradient> 
-              
-                <radialGradient id="RadialGradient2">
-                    <stop offset="0%" stop-color="yellow"/>
-                    <stop offset="100%" stop-color="green"/>
-                </radialGradient>       
-                <radialGradient id="RadialGradient3">
-                    <stop offset="0%" stop-color="white"/>
-                    <stop offset="100%" stop-color="blue"/>
-                </radialGradient>    
-                <radialGradient id="RadialGradient4">
-                    <stop offset="0%" stop-color="white"/>
-                    <stop offset="100%" stop-color="grey"/>
-                </radialGradient>
-                                
-            </defs>
-            <g  id ="svgTitle" transform="translate(2, 20)"></g>  
-            <g  id ="ledDisplay" transform="translate(315, 30) rotate(90)"></g>           
-            <g  id ="nativeDisplay" transform="translate(2, 280)"></g>       
-        </svg>
+        <defs id="defCol">            
+            <radialGradient id="RadialGradient2">
+                <stop offset="0%" stop-color="yellow"/>
+                <stop offset="100%" stop-color="green"/>
+            </radialGradient>                               
+        </defs>
+        <g  id ="svgTitle" transform="translate(2, 20)"></g>  
+        <g  id ="ledDisplay" transform="translate(315, 30) rotate(90)"></g>           
+        <g  id ="nativeDisplay" transform="translate(2, 280)"></g>       
+    </svg>
     <form name="selector" class="text">
-        <fieldset id="modes">
-            red <input class="radioBtnCol" id="red" type="radio" value="RadialGradient1" name="color" checked></input>
-            green <input class="radioBtnCol" id="green" type="radio" value="RadialGradient2" name="color"></input>
-            blue <input class="radioBtnCol" id="blue" type="radio" value="RadialGradient3" name="color"></input>
-            random <input class="radioBtnCol" id="random" type="radio" value="RadialGradient1,RadialGradient2,RadialGradient3" name="color"></input>
+        <input type="checkbox" id="rnd">Random Color</input>
+        <fieldset>
+            <legend id = "redInfo"></legend>
+             <input class="colClass" type="range" min="0" max="255" value="0" id="red">
+            
         </fieldset>
-        <fieldset id="modes">
+             <fieldset>
+             <legend id = "greenInfo"> </legend>             
+             <input class="colClass" type="range" min="0" max="255" value="0" id="green">
+            
+        </fieldset>
+        <fieldset>
+             <legend id = "blueInfo"></legend>
+             <input class="colClass" type="range" min="0" max="255" value="0" id="blue">
+                
+        </fieldset> 
+        <fieldset>
             dec <input class="radioBtnShape" id="dec" type="radio" value="dec" name="format" checked></input>
             dot <input class="radioBtnShape" id="dot" type="radio" value="dot" name="format"></input>
             rect <input class="radioBtnShape" id="rect" type="radio" value="rect" name="format"></input>

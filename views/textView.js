@@ -7,8 +7,8 @@ class TextView {
     }
 
     //numerical time display
-    svgText(text) {
+    svgText(unit) {
         this.clearSVGTxt();
-        new SVGTextObj().svgText(text.join(":"));
+        new SVGTextObj().svgText(`${unit.hour}:${unit.min}:${unit.sec}:${unit.tenth}`);
     }
 }

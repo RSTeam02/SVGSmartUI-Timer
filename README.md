@@ -11,6 +11,7 @@ Every unit has a sum from 1 to 63, for example:<br />
  0---0---1--0<br />=<br /> 
  2--30--45--0
 
++ 23.04: rotational random steps of RGB colors, jquery
 + 14.04: instead of RGB => RGB Sliders for 255^3 possible colors
 + 31.03: randomize R,G,B
 + 28.03: R,G,B colors added 

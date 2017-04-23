@@ -1,17 +1,16 @@
 class SVGLed {
 
     onOffState(elem, enabled) {
-        let led = document.getElementById(elem);
-
+        let led = $(`#${elem}`);
 
         if (enabled) {
-            led.setAttribute("fill", `url(#RadialGradient5)`);
-            led.setAttribute("fill-opacity", 1);
-            led.textContent = Math.pow(2, led.id % 6);
+            led.attr("fill", `url(#RadialGradient5)`);
+            led.attr("fill-opacity", 1);
+            led.text(Math.pow(2, elem % 6));
         } else {
-            led.setAttribute("fill", `url(#RadialGradient2)`);
-            led.setAttribute("fill-opacity", .3);
-            led.textContent = 0;
+            led.attr("fill", `url(#RadialGradient2)`);
+            led.attr("fill-opacity", .3);
+            led.text(0);
         }
     }
 }

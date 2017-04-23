@@ -39,7 +39,13 @@
         <g  id ="nativeDisplay" transform="translate(2, 280)"></g>       
     </svg>
     <form name="selector" class="text">
-        <input type="checkbox" id="rnd">Rotate Color</input>
+        
+        <fieldset>
+            <legend id>Rotate Color</legend>
+            <input class="shiftClass" type="checkbox" id="shiftR">R</input>
+            <input class="shiftClass" type="checkbox" id="shiftG">G</input>
+            <input class="shiftClass" type="checkbox" id="shiftB">B</input>
+        </fieldset>
         <fieldset>
             <legend id = "redInfo"></legend>
              <input class="colClass" type="range" min="0" max="255" value="0" id="red">

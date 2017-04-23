@@ -5,6 +5,7 @@
 class Controller {
 
     constructor() {
+        this.shiftClass = document.getElementsByClassName("shiftClass");
         this.colClass = document.getElementsByClassName("colClass");
         for (let i = 0; i < this.colClass.length; i++) {
             this.colClass[i].value = Math.floor(Math.random() * 252) + 1;
@@ -47,9 +48,9 @@ class Controller {
             });
         }
 
-        $("#rnd").click(() => {
+        /*$("#rnd").click(() => {
             this.rgbRand(function () { });
-        });
+        });*/
         //start
         $("#startBtn").click(() => {
             resetPush = 1;
@@ -60,9 +61,9 @@ class Controller {
                     running = true;
                     finished = false;
                     this.interval = setInterval(() => {
-                        if (document.getElementById("rnd").checked) {
+                        //if (document.getElementById("rnd").checked) {
                             this.rgbRand(function () { });
-                        }
+                        //}
                         if (-this.model.elapsedLap >= 50) {
                             (stopped)
                                 ? this.updateView(start, delayed)
@@ -211,7 +212,9 @@ class Controller {
             rgb[i] += this.op[i];
         }
         for (var i = 0; i < rgb.length; i++) {
-            this.colClass[i].value = rgb[i];
+            if (this.shiftClass[i].checked) {
+                this.colClass[i].value = rgb[i];
+            }
         }
         callback(this.setGradient());
     }

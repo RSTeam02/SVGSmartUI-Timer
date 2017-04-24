@@ -1,7 +1,8 @@
 # SVGSmartUI-Timer 0.x
 
 
-The project is based on the binary countdowntimer project, its UI is the table (matrix) itself and each unit (hour, minute, second) is defined by binary digits. The SVG display allows to scale viewing size, when the browser window is resized.
+The project is based on the binary countdowntimer project, its UI is the table (matrix) itself and each unit (hour, minute, second) is defined by binary digits. Every binary digit (or decimal) is equipped with a click event listener and every click leads to an increment or decrement of an unit.   
+The SVG display allows to scale viewing size, when the browser window is resized.
 Every unit can be de- and incremented from 1 to 63, for example:<br />
  0---0--32--0<br />
  0--16---0--0<br />

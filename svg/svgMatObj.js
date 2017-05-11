@@ -1,5 +1,9 @@
 class SVGMatObject extends SVGLed{
 
+    constructor(){
+        super();
+    }
+
     svgCircle(ledObj) {
         let led = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         $(led).attr("cursor", "pointer");
@@ -9,7 +13,7 @@ class SVGMatObject extends SVGLed{
         $(led).attr("cy", 40);
         $(led).attr("r", 12);
         $("#ledDisplay").append(led);
-        this.onOffState(ledObj.id, ledObj.onState);
+        super.onOffState(ledObj.id, ledObj.onState);
     }
 
     svgRect(ledObj) {
@@ -20,7 +24,7 @@ class SVGMatObject extends SVGLed{
         $(led).attr("width", 20);
         $(led).attr("height", 30);
         $("#ledDisplay").append(led);
-        this.onOffState(ledObj.id, ledObj.onState);
+        super.onOffState(ledObj.id, ledObj.onState);
     }
 
     svgNum(ledObj) {
@@ -35,7 +39,7 @@ class SVGMatObject extends SVGLed{
         $(txt).attr("font-family", "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif");
         $(txt).attr("font-size", "24px");
         $("#ledDisplay").append(txt);
-        this.onOffState(ledObj.id, ledObj.onState);
+        super.onOffState(ledObj.id, ledObj.onState);
     }
 
 

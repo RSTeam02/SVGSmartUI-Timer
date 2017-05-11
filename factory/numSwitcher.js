@@ -1,5 +1,9 @@
 class NumSwitcher extends SVGMatObject{
 
+    constructor(){
+        super();
+    }
+
     setMode(mode) {
         this.mode = mode;
     }
@@ -11,11 +15,11 @@ class NumSwitcher extends SVGMatObject{
     numSwitch(ledObj) {
         switch (this.getMode()) {
             case "dot":
-                return this.svgCircle(ledObj);
+                return super.svgCircle(ledObj);
             case "dec":
-                return this.svgNum(ledObj);
+                return super.svgNum(ledObj);
             case "rect":
-                return this.svgRect(ledObj);
+                return super.svgRect(ledObj);
             default:
                 return null;
         }

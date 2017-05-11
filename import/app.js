@@ -4,6 +4,6 @@ require.config({
     }
 });
 
-define(["jquery","../factory/numSwitcher", "../svg/svgStaticObj", "../svg/svgTextObj", "../svg/svgLed", "../svg/svgMatObj", "../views/titleView", "../msvc/binaryConverter", "../views/textView", "../views/matView", "../msvc/countdown", "../msvc/controller"], function () {
+define(["jquery","../svg/svgLed", "../svg/svgMatObj","../factory/numSwitcher", "../svg/svgStaticObj", "../svg/svgTextObj",  "../views/titleView", "../msvc/binaryConverter", "../views/textView", "../views/matView", "../msvc/countdown", "../msvc/controller"], function () {
     new Controller();    
 });

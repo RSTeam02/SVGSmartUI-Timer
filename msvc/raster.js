@@ -3,27 +3,25 @@
  * View as SVG => dom
  */
 
-class MatView {
-
+class Raster extends BinaryConverter{
     //raster display decimal or circle dots
-    svgRaster(numSwitcher, binArr = new Array(6)) {
+    drawRaster(strategy, binArr = new Array(6)) {
         let y = 0;
         let ledArr = [];
         let bin = [];
         let ledNo = 23;
         let ledObj = {};
-
-        this.clearSVGMat();
-
-        for (let k = 0; k < binArr.length; k++) {
-            bin[k] = (binArr[k] !== undefined) ? [...binArr[k]] : [..."000000"];
+        let binConv = super.convert(binArr);        
+        
+        for (let k = 0; k < binConv.length; k++) {
+            bin[k] = (binConv[k] !== undefined) ? [...binConv[k]] : [..."000000"];
         }
 
         for (let i = 3; i >= 0; i--) {
             ledArr[i] = [];
             let x = 0;
             for (let j = 0; j < 6; j++) {                
-                    numSwitcher.numSwitch(ledObj = {
+                    strategy.executeStrategy(ledObj = {
                         onState: ((bin[i][j] === "1") ? true : false), absX: x, absY: y, id: ledNo
                     });               
                 ledNo--;
@@ -33,12 +31,6 @@ class MatView {
             //next column
             y += 85
         }
-    }
-
-    clearSVGMat() {
-        while (ledDisplay.firstChild) {
-            ledDisplay.removeChild(ledDisplay.firstChild);
-        }
-    }
+    }    
 
 }

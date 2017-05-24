@@ -6,7 +6,7 @@ class SVGTextObj {
         $(txt).attr("fill", "white");
         $(txt).attr("font-family", "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif");
         $(txt).attr("font-size", "54px");
-        txt.textContent = text;
+        txt.textContent = `${text.hour}:${text.min}:${text.sec}:${text.tenth}`;
         $("#nativeDisplay").append(txt);
     }
 

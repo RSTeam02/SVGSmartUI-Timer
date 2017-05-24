@@ -4,6 +4,6 @@ require.config({
     }
 });
 
-define(["jquery","../svg/svgLed", "../svg/svgMatObj","../factory/numSwitcher", "../svg/svgStaticObj", "../svg/svgTextObj",  "../views/titleView", "../msvc/binaryConverter", "../views/textView", "../views/matView", "../msvc/countdown", "../msvc/controller"], function () {
+define(["jquery","../SVGdom/svgLed", "../SVGdom/svgDec", "../SVGdom/svgCircle", "../SVGdom/svgRect","../strategy/drawStrategy", "../SVGdom/svgStaticObj", "../SVGdom/svgTextObj", "../msvc/binaryConverter", "../msvc/raster", "../msvc/countdown", "../msvc/controller"], function () {
     new Controller();    
 });

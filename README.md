@@ -12,6 +12,7 @@ Every unit can be de- and incremented from 1 to 63, for example:<br />
  0---0---1--0<br />=<br /> 
  2--30--45--0
 
++ 12.05: replace Factory with Strategy pattern, seperate files for SVG shapes, more refactorings
 + 11.05: some refactoring
 + 23.04: random RGB preload, rotate R, G, B stepwise (shift all color - components at same time or specified), 
 jquery for UI, instead of DOM, 

@@ -10,7 +10,7 @@ class Controller {
         for (let i = 0; i < this.colClass.length; i++) {
             this.colClass[i].value = Math.floor(Math.random() * 252) + 1;
         }
-        new SVGStaticObj().svgTitle(new TitleView().titleText("SmartUI-Countdown Timer"));
+        new SVGStaticObj().svgTitle("SmartUI-Countdown Timer");
         this.classRadioShape = document.getElementsByClassName("radioBtnShape");
         this.classRadioCol = document.getElementsByClassName("radioBtnCol");
         this.incrdecr = new Array(3);
@@ -20,15 +20,40 @@ class Controller {
         this.RGBSlider();
         this.rgbRand(function () { });
         this.model = new Countdown();
-        this.matView = new MatView();
-        this.textView = new TextView();
-        this.numSwitcher = new NumSwitcher();
+        this.raster = new Raster();
+        this.textView = new SVGTextObj();             
         this.model.setDefault();
+        this.selectStrategy();
+        this.radioListener();
         this.buttonListener();
         this.ledListener();
         this.res = 0;
     }
 
+
+    radioListener(){     
+        for (let i = 0; i < this.classRadioShape.length; i++) {
+            $(this.classRadioShape[i]).click(() => { 
+                this.selectStrategy();
+            });       
+        }   
+    }
+
+    selectStrategy(){
+        var strategyObj = {
+            dec : new SVGDec(),
+            dot : new SVGCircle(),
+            rect : new SVGRect()
+        }
+
+        for (let i = 0; i < Object.keys(strategyObj).length; i++) {                          
+            $.each(strategyObj, (key, val) => {
+                if(key == $("input:radio[name='format']:checked").val()){
+                    this.strategy = new DrawStrategy(val); 
+                }                   
+            });            
+        }
+    }
 
     buttonListener() {
         var running = false;
@@ -37,21 +62,8 @@ class Controller {
         var delayed = 1;
         var resetPush = 1;
         var start = 0;
-        var btn = [];
+        var btn = [];        
 
-        for (let i = 0; i < this.classRadioShape.length; i++) {
-            if (this.classRadioShape[i].checked) {
-                this.numSwitcher.setMode(this.classRadioShape[i].value);
-            }
-            $(this.classRadioShape[i]).click(() => {
-                this.numSwitcher.setMode(this.classRadioShape[i].value);
-            });
-        }
-
-        /*$("#rnd").click(() => {
-            this.rgbRand(function () { });
-        });*/
-        //start
         $("#startBtn").click(() => {
             resetPush = 1;
             if (this.getTimer() > 0) {
@@ -89,6 +101,8 @@ class Controller {
 
         //reset
         $("#resetBtn").click(() => {
+            this.clrSVGDisp();
+            this.clrSVGTxt();
             start = new Date().getTime();
             stopped = running = false;
             delayed = 0;
@@ -99,7 +113,7 @@ class Controller {
                 this.setTimer(0);
                 resetPush = 1;
             } else {
-                this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(this.model.convertHms(this.getTimer())));
+                this.raster.drawRaster(this.strategy, this.model.convertHms(this.getTimer()));
             }
             this.textView.svgText(this.model.convertHms(this.getTimer()));
             clearInterval(this.interval);
@@ -110,10 +124,25 @@ class Controller {
 
     updateView(start, delayed = 0) {
         this.model.startCountdown(start, delayed, (cb) => {
-            this.matView.svgRaster(this.numSwitcher, new BinaryConverter().convert(cb));
+            this.clrSVGDisp();
+            this.clrSVGTxt();
+            this.raster.drawRaster(this.strategy, cb);
             this.textView.svgText(cb);
         });
     }
+
+    clrSVGDisp(){    
+        while (ledDisplay.firstChild) {
+            ledDisplay.removeChild(ledDisplay.firstChild);
+        }  
+          
+    }
+
+    clrSVGTxt(){
+        while (nativeDisplay.firstChild) {
+            nativeDisplay.removeChild(nativeDisplay.firstChild);
+        }     
+    }    
 
     setTimer(timer) {
         this.timer = timer;
@@ -126,7 +155,7 @@ class Controller {
     //mxn listener
     ledListener() {
         let x = 0;
-        this.matView.svgRaster(this.numSwitcher);
+        this.raster.drawRaster(this.strategy);
         //handler/listener for each led
         for (let j = 0; j < 24; j++) {
             (() => {
@@ -166,7 +195,8 @@ class Controller {
             ? this.res += this.unitConverter(led.id)
             : this.res -= this.unitConverter(led.id);
         new SVGLed().onOffState(led.id, active);
-        this.setTimer(this.res);
+        this.setTimer(this.res);    
+        this.clrSVGTxt();    
         this.textView.svgText(this.model.convertHms(this.res));
     }
 

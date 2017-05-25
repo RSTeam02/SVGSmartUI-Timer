@@ -18,10 +18,10 @@ class Countdown {
     convertHms(input) {
         var milli10 = Math.round(input / 100);
         var timeUnit = {
-            "tenth": milli10 % 10,
-            "sec": ("0" + Math.floor(milli10 / 10) % 60).slice(-2),
+            "hour": ("0" + Math.floor(milli10 / 36000) % 99).slice(-2),
             "min": ("0" + Math.floor(milli10 / 600) % 60).slice(-2),
-            "hour": ("0" + Math.floor(milli10 / 36000) % 99).slice(-2)
+            "sec": ("0" + Math.floor(milli10 / 10) % 60).slice(-2),
+            "tenth": milli10 % 10
         }
         return timeUnit;
     }

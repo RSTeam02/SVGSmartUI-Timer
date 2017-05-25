@@ -5,6 +5,7 @@
 class Controller {
 
     constructor() {
+        this.res = 0;
         this.shiftClass = document.getElementsByClassName("shiftClass");
         this.colClass = document.getElementsByClassName("colClass");
         for (let i = 0; i < this.colClass.length; i++) {
@@ -27,7 +28,7 @@ class Controller {
         this.radioListener();
         this.buttonListener();
         this.ledListener();
-        this.res = 0;
+        
     }
 
 

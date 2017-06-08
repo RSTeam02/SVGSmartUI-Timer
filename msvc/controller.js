@@ -22,37 +22,37 @@ class Controller {
         this.rgbRand(function () { });
         this.model = new Countdown();
         this.raster = new Raster();
-        this.textView = new SVGTextObj();             
+        this.textView = new SVGTextObj();
         this.model.setDefault();
         this.selectStrategy();
         this.radioListener();
         this.buttonListener();
         this.ledListener();
-        
+
     }
 
 
-    radioListener(){     
+    radioListener() {
         for (let i = 0; i < this.classRadioShape.length; i++) {
-            $(this.classRadioShape[i]).click(() => { 
+            $(this.classRadioShape[i]).click(() => {
                 this.selectStrategy();
-            });       
-        }   
+            });
+        }
     }
 
-    selectStrategy(){
+    selectStrategy() {
         var strategyObj = {
-            dec : new SVGDec(),
-            dot : new SVGCircle(),
-            rect : new SVGRect()
+            dec: new SVGDec(),
+            dot: new SVGCircle(),
+            rect: new SVGRect()
         }
 
-        for (let i = 0; i < Object.keys(strategyObj).length; i++) {                          
+        for (let i = 0; i < Object.keys(strategyObj).length; i++) {
             $.each(strategyObj, (key, val) => {
-                if(key == $("input:radio[name='format']:checked").val()){
-                    this.strategy = new DrawStrategy(val); 
-                }                   
-            });            
+                if (key == $("input:radio[name='format']:checked").val()) {
+                    this.strategy = new DrawStrategy(val);
+                }
+            });
         }
     }
 
@@ -63,7 +63,7 @@ class Controller {
         var delayed = 1;
         var resetPush = 1;
         var start = 0;
-        var btn = [];        
+        var btn = [];
 
         $("#startBtn").click(() => {
             resetPush = 1;
@@ -75,7 +75,7 @@ class Controller {
                     finished = false;
                     this.interval = setInterval(() => {
                         //if (document.getElementById("rnd").checked) {
-                            this.rgbRand(function () { });
+                        this.rgbRand(function () { });
                         //}
                         if (-this.model.elapsedLap >= 50) {
                             (stopped)
@@ -132,18 +132,18 @@ class Controller {
         });
     }
 
-    clrSVGDisp(){    
+    clrSVGDisp() {
         while (ledDisplay.firstChild) {
             ledDisplay.removeChild(ledDisplay.firstChild);
-        }  
-          
+        }
+
     }
 
-    clrSVGTxt(){
+    clrSVGTxt() {
         while (nativeDisplay.firstChild) {
             nativeDisplay.removeChild(nativeDisplay.firstChild);
-        }     
-    }    
+        }
+    }
 
     setTimer(timer) {
         this.timer = timer;
@@ -157,22 +157,15 @@ class Controller {
     ledListener() {
         let x = 0;
         this.raster.drawRaster(this.strategy);
-        //handler/listener for each led
-        for (let j = 0; j < 24; j++) {
-            (() => {
-                let x = j;
-                let enabled = true;
-                //access Matrix through handler
-                let handler = () => {
-                    (enabled)
-                        ? enabled = false
-                        : enabled = true;
-                    this.inputMatrix(document.getElementById(x), !enabled);
-                };
-                document.getElementById(x).addEventListener("click", handler, false);
-            })();
-        }
+        let enabled = new Array($(".raster").length);
+        enabled.fill(false);
+        $(".raster").click((event) => {
+            let currentId = event.currentTarget.id;
+            enabled[currentId] = (!enabled[currentId]) ? true : false;
+            this.inputMatrix(currentId, enabled[currentId]);
+        });
     }
+
 
     //assign h:m:s from raster input and convert to ms
     unitConverter(led) {
@@ -193,11 +186,11 @@ class Controller {
     //click on raster element(s) => convert to ms
     inputMatrix(led, active) {
         (active)
-            ? this.res += this.unitConverter(led.id)
-            : this.res -= this.unitConverter(led.id);
-        new SVGLed().onOffState(led.id, active);
-        this.setTimer(this.res);    
-        this.clrSVGTxt();    
+            ? this.res += this.unitConverter(led)
+            : this.res -= this.unitConverter(led);
+        new SVGLed().onOffState(led, active);
+        this.setTimer(this.res);
+        this.clrSVGTxt();
         this.textView.svgText(this.model.convertHms(this.res));
     }
 

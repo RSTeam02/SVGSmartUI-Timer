@@ -4,6 +4,7 @@ class SVGDec extends SVGLed{
         let txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
         let numMode;
         $(txt).attr("cursor", "pointer");
+        $(txt).attr("class", "raster");
         $(txt).attr("transform", "translate(5,20)");
         $(txt).attr("id", ledObj.id);
         $(txt).attr("x", ledObj.absX + 10);

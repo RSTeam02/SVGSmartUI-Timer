@@ -1,4 +1,4 @@
-class SVGLed {
+export class SVGLed {
 
     onOffState(elem, enabled) {
         let led = $(`#${elem}`);

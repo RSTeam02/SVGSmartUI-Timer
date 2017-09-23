@@ -12,6 +12,7 @@ Every unit can be de- and incremented from 1 to 63, for example:<br />
  0---0---1--0<br />=<br /> 
  2--30--45--0
 
++ 23.09: instead of require.js, using native import {} from '../abc.js' command for modular classes, in Firefox experimental => enter in address bar about:config, switch dom.moduleScripts.enabled: true
 + 07.06: improve listener implementation via jquery
 + 12.05: replace Factory with Strategy pattern, seperate files for SVG shapes, more refactorings
 + 11.05: some refactoring

@@ -1,4 +1,4 @@
-class BinaryConverter {
+export class BinaryConverter {
 
     convert(unit) {
         let binArr = [];

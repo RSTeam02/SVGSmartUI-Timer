@@ -1,4 +1,6 @@
-class SVGCircle extends SVGLed{
+import {SVGLed} from '../SVGdom/svgLed.js';
+
+export class SVGCircle extends SVGLed{
 
 
     draw(ledObj) {

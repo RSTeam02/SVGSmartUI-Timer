@@ -1,4 +1,4 @@
-class DrawStrategy{
+export class DrawStrategy{
 	
 	constructor(drawStrategy){
 		this.drawStrategy = drawStrategy;

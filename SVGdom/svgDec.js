@@ -1,4 +1,6 @@
-class SVGDec extends SVGLed{
+import {SVGLed} from '../SVGdom/svgLed.js';
+
+export class SVGDec extends SVGLed{
 
     draw(ledObj) {
         let txt = document.createElementNS("http://www.w3.org/2000/svg", "text");

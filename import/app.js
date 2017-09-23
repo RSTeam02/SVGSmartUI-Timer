@@ -1,9 +1,6 @@
-require.config({
-    paths: {
-        "jquery": "https://code.jquery.com/jquery-1.11.1.min"
-    }
-});
+import {Controller} from "../msvc/controller.js";
 
-define(["jquery","../SVGdom/svgLed", "../SVGdom/svgDec", "../SVGdom/svgCircle", "../SVGdom/svgRect","../strategy/drawStrategy", "../SVGdom/svgStaticObj", "../SVGdom/svgTextObj", "../msvc/binaryConverter", "../msvc/raster", "../msvc/countdown", "../msvc/controller"], function () {
+window.onload = function(){
     new Controller();    
-});
+
+}

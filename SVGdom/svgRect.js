@@ -1,4 +1,6 @@
-class SVGRect extends SVGLed{
+import {SVGLed} from '../SVGdom/svgLed.js';
+
+export class SVGRect extends SVGLed{
 
     draw(ledObj) {
         let led = document.createElementNS("http://www.w3.org/2000/svg", "rect");

@@ -2,7 +2,18 @@
  * @rsTeam02
  * Control unit 
  */
-class Controller {
+
+import {Countdown} from './countdown.js';
+import {Raster} from './raster.js';
+import {SVGTextObj} from '../SVGdom/svgTextObj.js';
+import {SVGStaticObj} from '../SVGdom/svgStaticObj.js';
+import {SVGDec} from '../SVGdom/svgDec.js';
+import {SVGCircle} from '../SVGdom/svgCircle.js';
+import {SVGRect} from '../SVGdom/svgRect.js';
+import {DrawStrategy} from '../strategy/drawStrategy.js';
+import {SVGLed} from '../SVGdom/svgLed.js';
+
+export class Controller {
 
     constructor() {
         this.res = 0;

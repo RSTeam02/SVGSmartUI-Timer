@@ -1,4 +1,4 @@
-class SVGStaticObj {
+export class SVGStaticObj {
 
     svgTitle(text) {
         let txt = document.createElementNS("http://www.w3.org/2000/svg", "text");

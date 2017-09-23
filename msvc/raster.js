@@ -3,7 +3,9 @@
  * View as SVG => dom
  */
 
-class Raster extends BinaryConverter {
+import {BinaryConverter} from "./binaryConverter.js";
+
+export class Raster extends BinaryConverter {
     //raster display decimal or circle dots
     drawRaster(strategy, binArr = { hour: 0, min: 0, sec: 0, tenth: 0 }) {
         let y = 0;

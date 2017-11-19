@@ -1,6 +1,7 @@
 # SVGSmartUI-Timer 0.x
 
 
+test-link: https://rsteam02.github.io/SVGSmartUI-Timer/
 The project is based on the binary countdowntimer project, its UI is the table (matrix) itself and each unit (hour, minute, second) is defined by binary digits. Every binary digit (or decimal) is equipped with a click event listener and every click leads to an increment or decrement of an unit.   
 The SVG display allows to scale viewing size, when the browser window is resized.
 Every unit can be de- and incremented from 1 to 63, for example:<br />
@@ -12,6 +13,7 @@ Every unit can be de- and incremented from 1 to 63, for example:<br />
  0---0---1--0<br />=<br /> 
  2--30--45--0
 
++ css, svg size fix
 + 23.09: instead of require.js, using native import {} from '../abc.js' command for modular classes, in Firefox experimental => enter in address bar about:config, switch dom.moduleScripts.enabled: true
 + 07.06: improve listener implementation via jquery
 + 12.05: replace Factory with Strategy pattern, seperate files for SVG shapes, more refactorings

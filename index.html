@@ -6,11 +6,25 @@
     <style>
         body {
             background-color: black;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
+            height: 100vh;
         }
         
+        @media (orientation: portrait) {
+            #svgContent{
+                width: 100%;
+                position: relative;
+            }
+        }
+
+        @media (orientation: landscape) {
+
+            #svgContent{
+                max-height: 100%;
+                position: relative;
+                margin-left: 24%;
+                margin-right: 24%;
+            }
+        }
     
         
         .title {
@@ -27,7 +41,7 @@
 
 
 <body>
-    <svg version="1.1" viewBox="0 0 300 300">
+    <svg id = "svgContent" version="1.1" viewBox="0 0 300 300">
         <defs id="defCol">            
             <radialGradient id="RadialGradient2">
                 <stop offset="0%" stop-color="yellow"/>

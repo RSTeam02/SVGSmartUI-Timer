@@ -7,9 +7,9 @@ export class SVGRect extends SVGLed{
         $(led).attr("cursor", "pointer");
         $(led).attr("class", "raster");
         $(led).attr("id", ledObj.id);
-        $(led).attr("transform", `translate(${ledObj.absX} ${ledObj.absY + 25})`);
-        $(led).attr("width", 20);
-        $(led).attr("height", 30);
+        $(led).attr("transform", `translate(${ledObj.absX + 15} ${ledObj.absY + 10})`);
+        $(led).attr("width", 30);
+        $(led).attr("height", 20);
         $("#ledDisplay").append(led);
         super.onOffState(ledObj.id, ledObj.onState);
     }

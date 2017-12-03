@@ -11,7 +11,7 @@ export class SVGDec extends SVGLed{
         $(txt).attr("id", ledObj.id);
         $(txt).attr("x", ledObj.absX + 10);
         $(txt).attr("y", ledObj.absY + 10);
-        $(txt).attr("style", "writing-mode: sideways-lr");
+        //$(txt).attr("style", "writing-mode: sideways-lr");
         $(txt).attr("font-family", "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif");
         $(txt).attr("font-size", "24px");
         $("#ledDisplay").append(txt);

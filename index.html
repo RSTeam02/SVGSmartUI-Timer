@@ -41,7 +41,7 @@
 
 
 <body>
-    <svg id = "svgContent" version="1.1" viewBox="0 0 300 300">
+    <svg id = "svgContent" version="1.1" viewBox="0 0 310 300">
         <defs id="defCol">            
             <radialGradient id="RadialGradient2">
                 <stop offset="0%" stop-color="yellow"/>
@@ -49,8 +49,10 @@
             </radialGradient>                               
         </defs>
         <g  id ="svgTitle" transform="translate(2, 20)"></g>  
-        <g  id ="ledDisplay" transform="translate(0, 25)"></g>           
-        <g  id ="nativeDisplay" transform="translate(2, 280)"></g>       
+        <g  id ="ledDisplay" transform="translate(10, 25)"></g>           
+        <g  id ="nativeDisplay" transform="translate(0, 295)"></g>
+                  
+               
     </svg>
     <form name="selector" class="text">
         <input class="btn" type="button" id="startBtn" value="start">
@@ -77,6 +79,7 @@
                 
         </fieldset> 
         <fieldset>
+                <input type="checkbox" id="display" checked>display</input>
             dec <input class="radioBtnShape" id="dec" type="radio" value="dec" name="format" checked></input>
             dot <input class="radioBtnShape" id="dot" type="radio" value="dot" name="format"></input>
             rect <input class="radioBtnShape" id="rect" type="radio" value="rect" name="format"></input>

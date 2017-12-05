@@ -76,6 +76,10 @@ export class Controller {
         var start = 0;
         var btn = [];
 
+        $("#display").click(()=>{
+            $("#display").is(':checked')? $("#nativeDisplay").show(): $("#nativeDisplay").hide();    
+        });
+
         $("#startBtn").click(() => {
             resetPush = 1;
             if (this.getTimer() > 0) {
@@ -139,6 +143,7 @@ export class Controller {
             this.clrSVGDisp();
             this.clrSVGTxt();
             this.raster.drawRaster(this.strategy, cb);
+            $("#display").is(':checked')? $("#nativeDisplay").show(): $("#nativeDisplay").hide();
             this.textView.svgText(cb);
         });
     }
